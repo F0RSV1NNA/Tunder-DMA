@@ -1,3 +1,4 @@
+
 #ifndef PLAYERS_H
 #define PLAYERS_H
 
@@ -6,6 +7,11 @@
 #include <cstdint>
 #include "Memory.h"
 #include "Offsets.h"
+#include <iostream>
+
+struct Vector3 {
+    float x, y, z;
+};
 
 class Player {
 public:
@@ -20,4 +26,4 @@ public:
 
 std::vector<Player> GetPlayers();
 
-#endif
+#endif // PLAYERS_H

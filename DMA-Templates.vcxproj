@@ -109,6 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,14 +152,13 @@
     <ClCompile Include="KmBoxNet\kmboxNet.cpp" />
     <ClCompile Include="KmBoxNet\my_enc.cpp" />
     <ClCompile Include="OurProgram\main.cpp" />
-    <ClCompile Include="Players..cpp" />
-    <ClCompile Include="Radar.cpp" />
+    <ClCompile Include="OurProgram\Players..cpp" />
+    <ClCompile Include="OurProgram\Radar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DMALibrary\framework.h" />
     <ClInclude Include="DMALibrary\libs\leechcore.h" />
     <ClInclude Include="DMALibrary\libs\vmmdll.h" />
-    <ClInclude Include="DMALibrary\Memory\InputManager.h" />
     <ClInclude Include="DMALibrary\Memory\Memory.h" />
     <ClInclude Include="DMALibrary\Memory\Registry.h" />
     <ClInclude Include="DMALibrary\Memory\Shellcode.h" />
@@ -175,9 +175,9 @@
     <ClInclude Include="KmBoxNet\HidTable.h" />
     <ClInclude Include="KmBoxNet\kmboxNet.h" />
     <ClInclude Include="KmBoxNet\my_enc.h" />
-    <ClInclude Include="Offsets.h" />
-    <ClInclude Include="Players.h" />
-    <ClInclude Include="Radar.h" />
+    <ClInclude Include="OurProgram\Offsets.h" />
+    <ClInclude Include="OurProgram\Players.h" />
+    <ClInclude Include="OurProgram\Radar.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="DMALibrary\libs\DMALibrary.lib" />

@@ -2,6 +2,8 @@
 #include "Memory.h"
 #include "Offsets.h"
 
+extern Memory mem;
+
 Player::Player(uintptr_t baseAddr) : baseAddress(baseAddr), x(0), y(0), z(0), team(0) {
     char nameBuffer[256];
     mem.Read(baseAddress + PlayerNameOffset, nameBuffer, sizeof(nameBuffer));
@@ -38,3 +40,4 @@ std::vector<Player> GetPlayers() {
 
     return players;
 }
+

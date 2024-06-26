@@ -58,10 +58,10 @@
     <ClCompile Include="OurProgram\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Players..cpp">
+    <ClCompile Include="OurProgram\Players..cpp">
       <Filter>Source Files\players</Filter>
     </ClCompile>
-    <ClCompile Include="Radar.cpp">
+    <ClCompile Include="OurProgram\Radar.cpp">
       <Filter>Source Files\radar</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
@@ -96,9 +96,6 @@
     <ClInclude Include="KmBoxNet\my_enc.h">
       <Filter>Dep%27s\Kmbox</Filter>
     </ClInclude>
-    <ClInclude Include="DMALibrary\Memory\InputManager.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="DMALibrary\libs\vmmdll.h">
       <Filter>Dep%27s\DMALibrary</Filter>
     </ClInclude>
@@ -123,16 +120,15 @@
     <ClInclude Include="DMALibrary\nt\structs.h">
       <Filter>Dep%27s\DMALibrary</Filter>
     </ClInclude>
-    <ClInclude Include="Offsets.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Players.h">
+    <ClInclude Include="OurProgram\Players.h">
       <Filter>Source Files\players</Filter>
     </ClInclude>
-    <ClInclude Include="Radar.h">
+    <ClInclude Include="OurProgram\Radar.h">
       <Filter>Source Files\radar</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imstb_truetype.h" />
+    <ClInclude Include="OurProgram\Offsets.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
     <ClInclude Include="Imgui\imgui_impl_dx11.h" />
@@ -140,6 +136,7 @@
     <ClInclude Include="Imgui\imgui_internal.h" />
     <ClInclude Include="Imgui\imstb_rectpack.h" />
     <ClInclude Include="Imgui\imstb_textedit.h" />
+    <ClInclude Include="Imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="DMALibrary\libs\DMALibrary.lib">
