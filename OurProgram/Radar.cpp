@@ -1,4 +1,3 @@
-// radar.cpp
 #include "Radar.h"
 #include "Players.h"
 #include <imgui.h>

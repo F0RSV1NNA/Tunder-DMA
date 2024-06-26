@@ -26,4 +26,4 @@ public:
 
 std::vector<Player> GetPlayers();
 
-#endif // PLAYERS_H
+#endif

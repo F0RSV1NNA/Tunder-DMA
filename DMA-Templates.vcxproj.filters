@@ -65,25 +65,25 @@
       <Filter>Source Files\radar</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_dx11.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,14 +129,30 @@
     <ClInclude Include="OurProgram\Offsets.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imconfig.h" />
-    <ClInclude Include="Imgui\imgui.h" />
-    <ClInclude Include="Imgui\imgui_impl_dx11.h" />
-    <ClInclude Include="Imgui\imgui_impl_win32.h" />
-    <ClInclude Include="Imgui\imgui_internal.h" />
-    <ClInclude Include="Imgui\imstb_rectpack.h" />
-    <ClInclude Include="Imgui\imstb_textedit.h" />
-    <ClInclude Include="Imgui\imstb_truetype.h" />
+    <ClInclude Include="Imgui\imstb_truetype.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imconfig.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imgui.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imgui_impl_dx11.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imgui_impl_win32.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imgui_internal.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imstb_rectpack.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imstb_textedit.h">
+      <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="DMALibrary\libs\DMALibrary.lib">
