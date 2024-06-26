@@ -24,8 +24,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 // Main code
 int main(int, char**)
 {
-    // Initialize DMA and base address currently dummy functions
-    if (!Memory::InitDMA())
+    if (!mem.Init("aces.exe", true, false))
     {
         printf("Failed to initialize DMA\n");
         return -1;
