@@ -1,6 +1,6 @@
 #ifndef OFFSETS_H
 #define OFFSETS_H
-
+//turn these into offsets.h
 const uintptr_t PlayerListOffset = 0x4FD2B88;
 const uintptr_t PlayerCountOffset = 0x4FD2B98;
 const uintptr_t LocalPlayerOffset = 0x4FD2BA0;
