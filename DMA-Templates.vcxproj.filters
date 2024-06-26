@@ -23,6 +23,12 @@
     <Filter Include="Dep%27s\DMALibrary\Libs">
       <UniqueIdentifier>{b2b01f56-bfe0-45cb-8c84-81f280fe4661}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\radar">
+      <UniqueIdentifier>{5cafd004-4454-46b9-8348-030d31ba68cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\players">
+      <UniqueIdentifier>{6adb6ef6-a7f4-4a56-906b-70ccbdad829c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KmBoxNet\my_enc.cpp">
@@ -49,28 +55,34 @@
     <ClCompile Include="DMALibrary\Memory\Memory.cpp">
       <Filter>Dep%27s\DMALibrary</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_widgets.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+    <ClCompile Include="OurProgram\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Players..cpp">
+      <Filter>Source Files\players</Filter>
+    </ClCompile>
+    <ClCompile Include="Radar.cpp">
+      <Filter>Source Files\radar</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_demo.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_draw.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_dx11.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_win32.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_tables.cpp">
-      <Filter>Dep%27s\Imgui</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OurProgram\main.cpp">
+    <ClCompile Include="Imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,31 +96,7 @@
     <ClInclude Include="KmBoxNet\my_enc.h">
       <Filter>Dep%27s\Kmbox</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imgui_impl_dx11.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imgui_impl_win32.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imgui_internal.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imstb_rectpack.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imstb_textedit.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imstb_truetype.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="DMALibrary\Memory\InputManager.h">
-      <Filter>Dep%27s\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\imconfig.h">
       <Filter>Dep%27s\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="DMALibrary\libs\vmmdll.h">
@@ -135,6 +123,23 @@
     <ClInclude Include="DMALibrary\nt\structs.h">
       <Filter>Dep%27s\DMALibrary</Filter>
     </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Players.h">
+      <Filter>Source Files\players</Filter>
+    </ClInclude>
+    <ClInclude Include="Radar.h">
+      <Filter>Source Files\radar</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imstb_truetype.h" />
+    <ClInclude Include="Imgui\imconfig.h" />
+    <ClInclude Include="Imgui\imgui.h" />
+    <ClInclude Include="Imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="Imgui\imgui_impl_win32.h" />
+    <ClInclude Include="Imgui\imgui_internal.h" />
+    <ClInclude Include="Imgui\imstb_rectpack.h" />
+    <ClInclude Include="Imgui\imstb_textedit.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="DMALibrary\libs\DMALibrary.lib">
