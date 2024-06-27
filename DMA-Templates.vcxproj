@@ -152,8 +152,7 @@
     <ClCompile Include="KmBoxNet\kmboxNet.cpp" />
     <ClCompile Include="KmBoxNet\my_enc.cpp" />
     <ClCompile Include="OurProgram\main.cpp" />
-    <ClCompile Include="OurProgram\Players..cpp" />
-    <ClCompile Include="OurProgram\Radar.cpp" />
+    <ClCompile Include="OurProgram\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DMALibrary\framework.h" />
@@ -175,9 +174,16 @@
     <ClInclude Include="KmBoxNet\HidTable.h" />
     <ClInclude Include="KmBoxNet\kmboxNet.h" />
     <ClInclude Include="KmBoxNet\my_enc.h" />
-    <ClInclude Include="OurProgram\Offsets.h" />
-    <ClInclude Include="OurProgram\Players.h" />
-    <ClInclude Include="OurProgram\Radar.h" />
+    <ClInclude Include="OurProgram\Camera.hpp" />
+    <ClInclude Include="OurProgram\Core.hpp" />
+    <ClInclude Include="OurProgram\LocalPlayer.hpp" />
+    <ClInclude Include="OurProgram\Matrix.hpp" />
+    <ClInclude Include="OurProgram\Offsets.hpp" />
+    <ClInclude Include="OurProgram\Player.hpp" />
+    <ClInclude Include="OurProgram\Render.hpp" />
+    <ClInclude Include="OurProgram\Vector2D.hpp" />
+    <ClInclude Include="OurProgram\Vector3D.hpp" />
+    <ClInclude Include="OurProgram\Vector4D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="DMALibrary\libs\DMALibrary.lib" />
@@ -200,7 +206,13 @@
     <None Include="DMALibrary\libs\DMALibrary.pdb" />
     <None Include="DMALibrary\symsrv.dll" />
     <None Include="DMALibrary\vmm.dll" />
+    <None Include="OurProgram\imgui.ini" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Imgui\bold.otf" />
+    <Font Include="Imgui\italic.otf" />
+    <Font Include="Imgui\regular.otf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

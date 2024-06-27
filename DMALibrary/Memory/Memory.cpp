@@ -222,6 +222,7 @@ bool Memory::Init(std::string process_name, bool memMap, bool debug)
 		LOG("[!] Could not get base address!\n");
 		return false;
 	}
+	base_address = this->current_process.base_address;
 
 	current_process.base_size = GetBaseSize(process_name);
 	if (!current_process.base_size)
@@ -809,4 +810,7 @@ void Memory::ExecuteWriteScatter(VMMDLL_SCATTER_HANDLE handle, int pid)
 	{
 		LOG("[-] Failed to clear Scatter\n");
 	}
+}
+bool Memory::IsValidPointer(uint64_t Pointer) {
+	return Pointer > 0x00010000 && Pointer < 0x7FFFFFFEFFFF;
 }

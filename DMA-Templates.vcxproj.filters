@@ -23,11 +23,11 @@
     <Filter Include="Dep%27s\DMALibrary\Libs">
       <UniqueIdentifier>{b2b01f56-bfe0-45cb-8c84-81f280fe4661}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\radar">
-      <UniqueIdentifier>{5cafd004-4454-46b9-8348-030d31ba68cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\players">
+    <Filter Include="Source Files\Memory">
       <UniqueIdentifier>{6adb6ef6-a7f4-4a56-906b-70ccbdad829c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{5cafd004-4454-46b9-8348-030d31ba68cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,12 +58,6 @@
     <ClCompile Include="OurProgram\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OurProgram\Players..cpp">
-      <Filter>Source Files\players</Filter>
-    </ClCompile>
-    <ClCompile Include="OurProgram\Radar.cpp">
-      <Filter>Source Files\radar</Filter>
-    </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
       <Filter>Dep%27s\Imgui</Filter>
     </ClCompile>
@@ -84,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="Imgui\imgui_widgets.cpp">
       <Filter>Dep%27s\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="OurProgram\Render.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,15 +117,6 @@
     <ClInclude Include="DMALibrary\nt\structs.h">
       <Filter>Dep%27s\DMALibrary</Filter>
     </ClInclude>
-    <ClInclude Include="OurProgram\Players.h">
-      <Filter>Source Files\players</Filter>
-    </ClInclude>
-    <ClInclude Include="OurProgram\Radar.h">
-      <Filter>Source Files\radar</Filter>
-    </ClInclude>
-    <ClInclude Include="OurProgram\Offsets.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Imgui\imstb_truetype.h">
       <Filter>Dep%27s\Imgui</Filter>
     </ClInclude>
@@ -152,6 +140,36 @@
     </ClInclude>
     <ClInclude Include="Imgui\imstb_textedit.h">
       <Filter>Dep%27s\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Camera.hpp">
+      <Filter>Source Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Core.hpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\LocalPlayer.hpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Offsets.hpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Player.hpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Matrix.hpp">
+      <Filter>Source Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Render.hpp">
+      <Filter>Source Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Vector2D.hpp">
+      <Filter>Source Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Vector3D.hpp">
+      <Filter>Source Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="OurProgram\Vector4D.hpp">
+      <Filter>Source Files\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,5 +232,19 @@
     <None Include="README.md">
       <Filter>Dep%27s</Filter>
     </None>
+    <None Include="OurProgram\imgui.ini">
+      <Filter>Dep%27s\Imgui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Imgui\bold.otf">
+      <Filter>Dep%27s\Imgui</Filter>
+    </Font>
+    <Font Include="Imgui\italic.otf">
+      <Filter>Dep%27s\Imgui</Filter>
+    </Font>
+    <Font Include="Imgui\regular.otf">
+      <Filter>Dep%27s\Imgui</Filter>
+    </Font>
   </ItemGroup>
 </Project>

@@ -1,162 +1,162 @@
-#include "radar.h"
+#include <iostream>
+#include <thread>
+#include <unordered_set>
+#include <locale>
+
 #include "Memory.h"
-#include <d3d11.h>
-#include <tchar.h>
-#include <imgui.h>
-#include "imgui_impl_dx11.h"
-#include "imgui_impl_win32.h"
+#include "Core.hpp"
+#include "Player.hpp"
+#include "LocalPlayer.hpp"
+#include "Camera.hpp"
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-
-static ID3D11Device* g_pd3dDevice = NULL;
-static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
-static IDXGISwapChain* g_pSwapChain = NULL;
-static ID3D11RenderTargetView* g_mainRenderTargetView = NULL;
+#include "Render.hpp"
 
 
-bool CreateDeviceD3D(HWND hWnd);
-void CleanupDeviceD3D();
-void CreateRenderTarget();
-void CleanupRenderTarget();
-LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+// Game Objects
+Core* GameCore = new Core();
+LocalPlayer* Myself = new LocalPlayer();
+Camera* GameCamera = new Camera();
 
-int main(int, char**)
+// Players
+std::vector<Player*>* PotentialPlayers = new std::vector<Player*>;
+std::vector<Player*>* Players = new std::vector<Player*>;
+
+void PlayerAddressScatter(std::vector<Player*>& players) {
+    // Create scatter handle
+    auto handle = mem.CreateScatterHandle();
+
+    for (size_t i = 0; i < players.size(); ++i) {
+        int index = players[i]->Index;
+        uint64_t address = GameCore->PlayerListAddress + (0x8 * i);
+        mem.AddScatterReadRequest(handle, address, &players[i]->Address, sizeof(uint64_t));
+    }
+
+    // Execute the scatter read
+    mem.ExecuteReadScatter(handle);
+
+    // Close the scatter handle
+    mem.CloseScatterHandle(handle);
+}
+
+void PlayerDataScatter(std::vector<Player*>& players) {
+    for (size_t i = 0; i < players.size(); ++i) {
+        if (!players[i]->IsValid()) {
+            continue;
+        }
+
+        // Read Team
+        uint64_t teamAddress = players[i]->Address + off_player_team;
+        players[i]->Team = mem.Read<uint8_t>(teamAddress, true);
+
+        // Read GuiState
+        uint64_t guiStateAddress = players[i]->Address + off_gui_state;
+        players[i]->GuiState = mem.Read<uint8_t>(guiStateAddress, true);
+
+        // Read Unit Ptr
+        uint64_t unitPtrAddress = players[i]->Address + off_unit_ptr;
+        players[i]->UnitAddress = mem.Read<uint64_t>(unitPtrAddress, true);
+    }
+}
+
+void PlayerUnitScatter(std::vector<Player*>& players) {
+    // Create scatter handle
+    auto handle = mem.CreateScatterHandle();
+
+    for (size_t i = 0; i < players.size(); ++i) {
+        Player* player = players[i];
+
+        if (!mem.IsValidPointer(player->Address) || !mem.IsValidPointer(player->UnitAddress) || player->GuiState != 2) {
+            player->ResetPlayer();
+            continue;
+        }
+
+        // Scatter read request for Position
+        uint64_t positionAddress = player->UnitAddress + off_position;
+        mem.AddScatterReadRequest(handle, positionAddress, &player->Position, sizeof(Vector3D));
+
+        // Scatter read request for Rotation Matrix
+        uint64_t rotationAddress = player->UnitAddress + off_rotation;
+        mem.AddScatterReadRequest(handle, rotationAddress, &player->RotationMatrix, sizeof(player->RotationMatrix));
+    }
+
+    // Execute the scatter read
+    mem.ExecuteReadScatter(handle);
+
+    // Close the scatter handle
+    mem.CloseScatterHandle(handle);
+}
+
+
+
+// Core
+void UpdateCore() {
+    static bool PlayersPopulated = false;
+    try {
+        while (true) {
+            // Clear Players
+            //Players->clear();
+
+            //## Core Update ##//
+            GameCore->Read();
+            if (!GameCore->IsValid()) {
+                continue;
+            }
+
+            //## Local Player Update ##//
+            Myself->Read();
+            if (!Myself->IsValid() || !Myself->ValidPosition() || Myself->GuiState != 2) {
+                continue;
+            }
+
+            //## Player Update ##//
+            // Populate Players
+            PlayerAddressScatter(*PotentialPlayers);
+            for (int i = 0; i < PotentialPlayers->size(); i++) {
+                Player* p = PotentialPlayers->at(i);
+                if (p->Address != 0)
+                    Players->push_back(p);
+            }
+
+            // Update Players
+            PlayerDataScatter(*Players);
+            PlayerUnitScatter(*Players);
+        }
+    }
+    catch (const std::exception& ex) {
+        std::cout << "Error: " << ex.what() << std::endl;
+        return;
+    }
+}
+
+int main()
 {
-    if (!mem.Init("aces.exe", true, false))
-    {
-        printf("Failed to initialize DMA\n");
-        return -1;
+    std::cout << "-----------------------------" << std::endl;
+	std::cout << "WarThunderDMA" << std::endl;
+	std::cout << "-----------------------------" << std::endl;
+
+	// Initialize DMA
+	if (!mem.Init("aces.exe", true, false))
+	{
+		std::cout << "Failed to initilize DMA" << std::endl;
+        std::cout << "Press ENTER to continue...";
+        std::cin.get();
+	}
+    std::cout << "DMA initilized" << std::endl;
+
+    try {
+        for (int i = 0; i < 32; i++)
+            PotentialPlayers->push_back(new Player(i, Myself, GameCore));
+
+        std::cout << "-----------------------------" << std::endl;
+
+        // Threads
+        std::thread coreThread(UpdateCore);
+        std::thread renderThread(Render, Myself, Players, GameCamera);
+        coreThread.join();
     }
+    catch (...) {}
 
-    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("ImGui Example"), NULL };
-    RegisterClassEx(&wc);
-    HWND hwnd = CreateWindow(wc.lpszClassName, _T("ImGui DirectX11 Example"), WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
-
-    if (!CreateDeviceD3D(hwnd))
-    {
-        CleanupDeviceD3D();
-        UnregisterClass(wc.lpszClassName, wc.hInstance);
-        return 1;
-    }
-
-    ShowWindow(hwnd, SW_SHOWDEFAULT);
-    UpdateWindow(hwnd);
-
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui::StyleColorsDark();
-    ImGui_ImplWin32_Init(hwnd);
-    ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
-
-    // Main loop
-    bool done = false;
-    while (!done)
-    {
-        MSG msg;
-        while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-            if (msg.message == WM_QUIT)
-                done = true;
-        }
-        if (done)
-            break;
-
-        ImGui_ImplDX11_NewFrame();
-        ImGui_ImplWin32_NewFrame();
-        ImGui::NewFrame();
-
-        // Call the radar drawing function
-        DrawRadar();
-
-        // Rendering
-        ImGui::Render();
-        const float clear_color_with_alpha[4] = { 0.45f, 0.55f, 0.60f, 1.00f };
-        g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
-        g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
-        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
-        g_pSwapChain->Present(1, 0);
-    }
-
-    ImGui_ImplDX11_Shutdown();
-    ImGui_ImplWin32_Shutdown();
-    ImGui::DestroyContext();
-
-    CleanupDeviceD3D();
-    UnregisterClass(wc.lpszClassName, wc.hInstance);
-
+    std::cout << "Press ENTER to exit...";
+    std::cin.get();  // Wait for user to press Enter
     return 0;
-}
-
-bool CreateDeviceD3D(HWND hWnd) {
-    DXGI_SWAP_CHAIN_DESC sd;
-    ZeroMemory(&sd, sizeof(sd));
-    sd.BufferCount = 1;
-    sd.BufferDesc.Width = 1280;
-    sd.BufferDesc.Height = 800;
-    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    sd.BufferDesc.RefreshRate.Numerator = 60;
-    sd.BufferDesc.RefreshRate.Denominator = 1;
-    sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.OutputWindow = hWnd;
-    sd.SampleDesc.Count = 1;
-    sd.SampleDesc.Quality = 0;
-    sd.Windowed = TRUE;
-    sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-
-    UINT createDeviceFlags = 0;
-    D3D_FEATURE_LEVEL featureLevel;
-    const D3D_FEATURE_LEVEL featureLevelArray[2] = { D3D_FEATURE_LEVEL_11_0, D3D_FEATURE_LEVEL_10_0 };
-    if (D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, createDeviceFlags, featureLevelArray, 2, D3D11_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice, &featureLevel, &g_pd3dDeviceContext) != S_OK)
-        return false;
-
-    CreateRenderTarget();
-    return true;
-}
-
-void CleanupDeviceD3D() {
-    CleanupRenderTarget();
-    if (g_pSwapChain) { g_pSwapChain->Release(); g_pSwapChain = NULL; }
-    if (g_pd3dDeviceContext) { g_pd3dDeviceContext->Release(); g_pd3dDeviceContext = NULL; }
-    if (g_pd3dDevice) { g_pd3dDevice->Release(); g_pd3dDevice = NULL; }
-}
-
-void CreateRenderTarget() {
-    ID3D11Texture2D* pBackBuffer;
-    g_pSwapChain->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
-    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &g_mainRenderTargetView);
-    pBackBuffer->Release();
-}
-
-void CleanupRenderTarget() {
-    if (g_mainRenderTargetView) { g_mainRenderTargetView->Release(); g_mainRenderTargetView = NULL; }
-}
-
-LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
-        return true;
-    switch (msg)
-    {
-    case WM_SIZE:
-        if (g_pd3dDevice != NULL && wParam != SIZE_MINIMIZED)
-        {
-            CleanupRenderTarget();
-            g_pSwapChain->ResizeBuffers(0, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam), DXGI_FORMAT_UNKNOWN, 0);
-            CreateRenderTarget();
-        }
-        return 0;
-    case WM_SYSCOMMAND:
-        if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
-            return 0;
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-    }
-    return DefWindowProc(hWnd, msg, wParam, lParam);
 }

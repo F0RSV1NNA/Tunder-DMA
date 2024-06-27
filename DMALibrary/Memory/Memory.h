@@ -315,7 +315,9 @@ public:
 	void ExecuteWriteScatter(VMMDLL_SCATTER_HANDLE handle, int pid = 0);
 
 	/*the FPGA handle*/
+	bool IsValidPointer(uint64_t Pointer);
 	VMM_HANDLE vHandle;
+	uint64_t base_address;
 };
 
 inline Memory mem;
