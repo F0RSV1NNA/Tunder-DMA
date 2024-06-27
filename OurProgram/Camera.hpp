@@ -1,9 +1,12 @@
 #pragma once
+
+#include "Memory.h"
+
 #include "Offsets.hpp"
+
 #include "LocalPlayer.hpp"
 #include "Player.hpp"
-#include "Offsets.hpp"
-#include "Memory.h"
+
 #include "Vector3D.hpp"
 #include "Vector2D.hpp"
 #include "Matrix.hpp"

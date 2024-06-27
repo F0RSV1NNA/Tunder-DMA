@@ -1,6 +1,9 @@
 #pragma once
-#include "Offsets.hpp"
+
 #include "Memory.h"
+
+#include "Offsets.hpp"
+
 
 struct Core {
 

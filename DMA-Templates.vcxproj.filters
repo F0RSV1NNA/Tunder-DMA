@@ -26,7 +26,7 @@
     <Filter Include="Source Files\Memory">
       <UniqueIdentifier>{6adb6ef6-a7f4-4a56-906b-70ccbdad829c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\math">
+    <Filter Include="Source Files\Math">
       <UniqueIdentifier>{5cafd004-4454-46b9-8348-030d31ba68cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -142,7 +142,7 @@
       <Filter>Dep%27s\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Camera.hpp">
-      <Filter>Source Files\math</Filter>
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Core.hpp">
       <Filter>Source Files\Memory</Filter>
@@ -157,19 +157,19 @@
       <Filter>Source Files\Memory</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Matrix.hpp">
-      <Filter>Source Files\math</Filter>
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Render.hpp">
-      <Filter>Source Files\math</Filter>
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Vector2D.hpp">
-      <Filter>Source Files\math</Filter>
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Vector3D.hpp">
-      <Filter>Source Files\math</Filter>
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="OurProgram\Vector4D.hpp">
-      <Filter>Source Files\math</Filter>
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

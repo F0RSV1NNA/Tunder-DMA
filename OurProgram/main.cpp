@@ -5,10 +5,11 @@
 
 #include "Memory.h"
 #include "Core.hpp"
+
 #include "Player.hpp"
 #include "LocalPlayer.hpp"
-#include "Camera.hpp"
 
+#include "Camera.hpp"
 #include "Render.hpp"
 
 
@@ -73,10 +74,6 @@ void PlayerUnitScatter(std::vector<Player*>& players) {
         // Scatter read request for Position
         uint64_t positionAddress = player->UnitAddress + off_position;
         mem.AddScatterReadRequest(handle, positionAddress, &player->Position, sizeof(Vector3D));
-
-        // Scatter read request for Rotation Matrix
-        uint64_t rotationAddress = player->UnitAddress + off_rotation;
-        mem.AddScatterReadRequest(handle, rotationAddress, &player->RotationMatrix, sizeof(player->RotationMatrix));
     }
 
     // Execute the scatter read
@@ -85,8 +82,6 @@ void PlayerUnitScatter(std::vector<Player*>& players) {
     // Close the scatter handle
     mem.CloseScatterHandle(handle);
 }
-
-
 
 // Core
 void UpdateCore() {

@@ -1,20 +1,23 @@
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+
 #include "Render.hpp"
+
 #include "LocalPlayer.hpp"
 #include "Player.hpp"
 #include "Camera.hpp"
+
 #include <d3d11.h>
 #include <tchar.h>
 #include <utility>
-#include <cmath>
+
 
 // Data
 static ID3D11Device* g_pd3dDevice = nullptr;
 static ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
 static IDXGISwapChain* g_pSwapChain = nullptr;
-static UINT g_ResizeWidth = 0, g_ResizeHeight = 0;
+static UINT                     g_ResizeWidth = 0, g_ResizeHeight = 0;
 static ID3D11RenderTargetView* g_mainRenderTargetView = nullptr;
 
 // Forward declarations of helper functions
@@ -32,19 +35,22 @@ ImFont* huge_font;
 // Main code
 void Render(LocalPlayer* Myself, std::vector<Player*>* Players, Camera* GameCamera)
 {
-    int width = 800;  // Define the width of the map window
-    int height = 600; // Define the height of the map window
-
+    int width = GetSystemMetrics(SM_CXSCREEN);
+    int height = GetSystemMetrics(SM_CYSCREEN);
     // Create application window
-    WNDCLASSEX wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ApexDMA", nullptr };
-    ::RegisterClassEx(&wc);
-    HWND hwnd = ::CreateWindowEx(0, wc.lpszClassName, L"ApexDMA", WS_OVERLAPPEDWINDOW, 100, 100, width, height, nullptr, nullptr, wc.hInstance, nullptr);
+    WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"ApexDMA", nullptr };
+    ::RegisterClassExW(&wc);
+    HWND hwnd = ::CreateWindowEx(WS_EX_LAYERED, wc.lpszClassName, L"TunderDMA", WS_POPUP, 0, 0, width, height, nullptr, nullptr, wc.hInstance, nullptr);
+
+    // Set Transparency, WS_EX_LAYERED is required for transparency
+    SetLayeredWindowAttributes(hwnd, 0, 255, LWA_ALPHA);
+    SetLayeredWindowAttributes(hwnd, 0, RGB(0, 0, 0), LWA_COLORKEY);
 
     // Initialize Direct3D
     if (!CreateDeviceD3D(hwnd))
     {
         CleanupDeviceD3D();
-        ::UnregisterClass(wc.lpszClassName, wc.hInstance);
+        ::UnregisterClassW(wc.lpszClassName, wc.hInstance);
         return;
     }
 
@@ -72,15 +78,13 @@ void Render(LocalPlayer* Myself, std::vector<Player*>* Players, Camera* GameCame
     ImGui_ImplWin32_Init(hwnd);
     ImGui_ImplDX11_Init(g_pd3dDevice, g_pd3dDeviceContext);
 
-    ImVec4 clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
-
-    // Define the initial scale of the map
-    float mapScale = 4.0f;  // Adjust this to scale the map
+    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
 
     // Main loop
     while (true)
     {
         // Poll and handle messages (inputs, window resize, etc.)
+        // See the WndProc() function below for our to dispatch events to the Win32 backend.
         MSG msg;
         while (::PeekMessage(&msg, nullptr, 0U, 0U, PM_REMOVE))
         {
@@ -107,59 +111,55 @@ void Render(LocalPlayer* Myself, std::vector<Player*>* Players, Camera* GameCame
         // Foreground Drawlist
         ImDrawList* fg_draw = ImGui::GetForegroundDrawList();
 
-        // Performance
-        std::string PerformanceString = "Render FPS: " + std::to_string(static_cast<int>(ImGui::GetIO().Framerate));
-        fg_draw->AddText(ImVec2(10, 50), IM_COL32(255, 255, 255, 255), PerformanceString.c_str());
+        // Radar Blips
+        float radarCenterX = width / 2.0f;
+        float radarCenterY = height / 2.0f;
 
-        // Draw grid
-        int gridSize = 50;
-        for (int i = 0; i < width; i += gridSize)
-        {
-            fg_draw->AddLine(ImVec2((float)i, 0), ImVec2((float)i, (float)height), IM_COL32(255, 255, 255, 50));
-        }
-        for (int i = 0; i < height; i += gridSize)
-        {
-            fg_draw->AddLine(ImVec2(0, (float)i), ImVec2((float)width, (float)i), IM_COL32(255, 255, 255, 50));
-        }
+        // Offset for visibility on the edge of the screen
+        float edgeOffset = 5.0f;
 
-        // Map Center
-        float mapCenterX = width / 2.0f;
-        float mapCenterY = height / 2.0f;
-
-        // Draw players on the map
         for (Player* player : *Players) {
             if (player->GuiState != 2 || (player->Team != 1 && player->Team != 2)) {
                 continue;
             }
 
             // Calculate the relative position
-            float relativeX = (player->Position.x - Myself->Position.x) * mapScale;
-            float relativeY = (player->Position.z - Myself->Position.z) * mapScale;
+            float relativeX = player->Position.x - Myself->Position.x;
+            float relativeY = player->Position.z - Myself->Position.z;
+
+            // Flip cuz weirdo
+            relativeY = -relativeY;
 
             // Map the relative positions to screen coordinates
-            float screenX = mapCenterX + relativeX;
-            float screenY = mapCenterY - relativeY;  // Note the negative sign to flip the Y-axis
+            float screenX = radarCenterX + relativeX;
+            float screenY = radarCenterY + relativeY;
 
-            // Draw the player position on the map
+
+            // Offset for visibility on the edge of the screen
+            if (screenX < 0) {
+                screenX = edgeOffset;
+            }
+            else if (screenX > width) {
+                screenX = width - edgeOffset;
+            }
+
+            if (screenY < 0) {
+                screenY = edgeOffset;
+            }
+            else if (screenY > height) {
+                screenY = height - edgeOffset;
+            }
+
+            // Draw the player position on the radar
             if (player->IsAlly()) {
                 fg_draw->AddCircleFilled(ImVec2(screenX, screenY), 5.0f, IM_COL32(0, 0, 255, 255));
             }
             else {
                 fg_draw->AddCircleFilled(ImVec2(screenX, screenY), 5.0f, IM_COL32(255, 0, 0, 255));
             }
-
-            // Calculate the direction the player is facing
-            float yaw = player->GetYawFromRotationMatrix();
-            float arrowLength = 10.0f;
-            float directionX = screenX + arrowLength * cosf(yaw);
-            float directionY = screenY - arrowLength * sinf(yaw);
-
-            // Draw the arrow indicating the direction the player is facing
-            fg_draw->AddLine(ImVec2(screenX, screenY), ImVec2(directionX, directionY), IM_COL32(255, 255, 255, 255), 2.0f);
         }
 
-        // Draw local player at the center of the map
-        fg_draw->AddCircleFilled(ImVec2(mapCenterX, mapCenterY), 6.0f, IM_COL32(0, 255, 0, 255));
+        fg_draw->AddCircleFilled(ImVec2(radarCenterX, radarCenterY), 6.0f, IM_COL32(0, 255, 0, 255));
 
         // Rendering
         ImGui::Render();
@@ -178,7 +178,7 @@ void Render(LocalPlayer* Myself, std::vector<Player*>* Players, Camera* GameCame
 
     CleanupDeviceD3D();
     ::DestroyWindow(hwnd);
-    ::UnregisterClass(wc.lpszClassName, wc.hInstance);
+    ::UnregisterClassW(wc.lpszClassName, wc.hInstance);
 
     return;
 }
@@ -243,6 +243,7 @@ void CleanupRenderTarget()
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 // Win32 message handler
+
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
@@ -264,5 +265,5 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
         ::PostQuitMessage(0);
         return 0;
     }
-    return ::DefWindowProc(hWnd, msg, wParam, lParam);
+    return ::DefWindowProcW(hWnd, msg, wParam, lParam);
 }

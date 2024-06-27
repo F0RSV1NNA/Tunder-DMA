@@ -1,34 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(516,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  main.cpp
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(124,11): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(491,10): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(500,10): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(395,35): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1458,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1468,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1475,27): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1484,28): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1493,36): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1509,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1519,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1528,26): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1536,31): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1543,28): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1552,28): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1563,26): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1572,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1580,29): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1589,26): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1598,24): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1607,29): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(2141,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Vector2D.hpp(85,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Vector3D.hpp(84,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(41,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(42,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(57,17): warning C4804: '>': unsafe use of type 'bool' in operation
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(57,43): warning C4804: '<': unsafe use of type 'bool' in operation
   Render.cpp
 C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(124,11): warning C4200: nonstandard extension used: zero-sized array in struct/union
 C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(491,10): warning C4200: nonstandard extension used: zero-sized array in struct/union
@@ -54,12 +25,42 @@ C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1607,29): warning C4200
 C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(2141,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
 C:\Users\RyanPC\Desktop\Thunder\OurProgram\Vector2D.hpp(85,23): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\RyanPC\Desktop\Thunder\OurProgram\Vector3D.hpp(84,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(41,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(42,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(57,17): warning C4804: '>': unsafe use of type 'bool' in operation
-C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(57,43): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(58,17): warning C4804: '>': unsafe use of type 'bool' in operation
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(58,43): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(44,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(45,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(124,11): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(491,10): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\leechcore.h(500,10): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(395,35): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1458,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1468,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1475,27): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1484,28): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1493,36): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1509,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1519,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1528,26): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1536,31): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1543,28): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1552,28): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1563,26): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1572,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1580,29): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1589,26): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1598,24): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(1607,29): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\DMALibrary\libs\vmmdll.h(2141,25): warning C4200: nonstandard extension used: zero-sized array in struct/union
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Vector2D.hpp(85,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Vector3D.hpp(84,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(58,17): warning C4804: '>': unsafe use of type 'bool' in operation
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Player.hpp(58,43): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(44,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
+C:\Users\RyanPC\Desktop\Thunder\OurProgram\Camera.hpp(45,30): warning C4244: '*=': conversion from 'double' to 'float', possible loss of data
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 2119 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  7 of 2118 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    33 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   DMA-Templates.vcxproj -> C:\Users\RyanPC\Desktop\Thunder\Compiled\Tunder-DMA.exe

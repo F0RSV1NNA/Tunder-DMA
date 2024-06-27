@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
-#include "Offsets.hpp"
+
 #include "Memory.h"
+#include "Offsets.hpp"
+
 #include "Vector2D.hpp"
 #include "Vector3D.hpp"
 
